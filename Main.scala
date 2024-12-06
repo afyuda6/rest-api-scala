@@ -47,6 +47,5 @@ object Main {
 
     server.setExecutor(null)
     server.start()
-    println("Server is running on http://localhost:6010")
   }
 }
