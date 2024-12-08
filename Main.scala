@@ -38,8 +38,6 @@ object Main {
 
       if ((path == "/users" || path == "/users/") && (query == null || query.isEmpty)) {
         User.handle(exchange)
-      } else if (path.matches("^/users/([a-zA-Z0-9_-]+)$")) {
-        User.handle(exchange)
       } else {
         notFoundHandler.handle(exchange)
       }

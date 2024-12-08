@@ -98,7 +98,7 @@ object User {
 
     val params = parseParams(requestBody)
     val name = params.getOrElse("name", None)
-    if (name.isEmpty) {
+    if (name.isEmpty || name.contains("+")) {
       val response =
         """
           |{
@@ -164,7 +164,7 @@ object User {
     val params = parseParams(requestBody)
     val name = params.getOrElse("name", None)
     val id = params.getOrElse("id", None)
-    if (name.isEmpty || id.isEmpty) {
+    if (name.isEmpty || id.isEmpty || name.contains("+") || id.contains("+")) {
       val response =
         """
           |{
@@ -231,7 +231,7 @@ object User {
 
     val params = parseParams(requestBody)
     val id = params.getOrElse("id", None)
-    if (id.isEmpty) {
+    if (id.isEmpty || id.contains("+")) {
       val response =
         """
           |{
