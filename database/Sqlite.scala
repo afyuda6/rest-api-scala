@@ -13,13 +13,11 @@ object Sqlite {
   def resetDatabase(): Unit = {
     val connection = connect()
     val statement = connection.createStatement()
-
     val dropUserTableQuery =
       """
         |DROP TABLE IF EXISTS users;
         |""".stripMargin
     statement.executeUpdate(dropUserTableQuery)
-
     statement.close()
     connection.close()
   }
@@ -27,7 +25,6 @@ object Sqlite {
   def initDatabase(): Unit = {
     val connection = connect()
     val statement = connection.createStatement()
-
     val createUserTableQuery =
       """
         |CREATE TABLE IF NOT EXISTS users (
@@ -36,7 +33,6 @@ object Sqlite {
         |);
         |""".stripMargin
     statement.executeUpdate(createUserTableQuery)
-
     statement.close()
     connection.close()
   }
