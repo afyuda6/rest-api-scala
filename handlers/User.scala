@@ -223,6 +223,18 @@ object User {
   }
 
   def handle(exchange: HttpExchange): Unit = {
+    exchange.getResponseHeaders.add("Access-Control-Allow-Origin", "*")
+    exchange.getResponseHeaders.add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    exchange.getResponseHeaders.add("Access-Control-Allow-Headers", "Content-Type")
+    if (exchange.getRequestMethod == "OPTIONS") {
+      exchange.getResponseHeaders.add("Content-Type", "application/json")
+      val response = ""
+      exchange.sendResponseHeaders(200, response.getBytes.length)
+      val outputStream = exchange.getResponseBody
+      outputStream.write(response.getBytes)
+      outputStream.close()
+      return
+    }
     val path = exchange.getRequestURI.getPath
     val query = exchange.getRequestURI.getQuery
     if ((path == "/users" || path == "/users/") && (query == null || query.isEmpty)) {
